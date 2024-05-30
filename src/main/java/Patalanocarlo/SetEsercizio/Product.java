@@ -31,4 +31,5 @@ public class Product { //Inizializziamo la classe Product con i 4 valori richies
     public String toString() { //Con il toString vado a stringifizzare in stringa:
         return "Prodotti :{id=" + id + " "  + "name=" + name + ""  + ", category='" + category + " " + ", price=" + price + '}';
     } // passo l'id il nome cateogria e prezzo dei prodotti...
+
 }
