@@ -17,7 +17,7 @@ public class Application {
  //Esercizio 1
         List<Product> productList = new ArrayList<>();
         Faker faker = new Faker();
-        Product prodotto_1 = new Product(244L, faker.commerce().productName(), faker.commerce().department(), 340.45);
+        Product prodotto_1 = new Product(244L, faker.commerce().productName(), faker.commerce().department(), 3401.45);
         Product prodotto_2 = new Product(21325L, faker.commerce().productName(), faker.commerce().department(), 140.95);
         Product prodotto_3 = new Product(219523L, faker.commerce().productName(), faker.commerce().department(), 1240);
 
@@ -67,9 +67,35 @@ public class Application {
 
         if (mostExpensiveProduct != null) {
             System.out.println("Prodotto più costoso: " + mostExpensiveProduct.getName());
-        } else {
-            System.out.println("Nessun prodotto trovato.");
         }
 //Fine esercizio 3
+        //Esercizio 4
+
+        // Calcola la media degli importi degli ordini
+        double MediaImporto = ordini.stream()
+                .mapToDouble(order -> order.getProducts().stream()
+                        .mapToDouble(Product::getPrice)
+                        .sum()) // Somma gli importi di tutti i prodotti in ciascun ordine
+                .average() // Calcolo la media degli importi
+                .orElse(0.0); // altrimenti mi da 0
+
+        System.out.println("Media degli importi degli ordini: " + MediaImporto);
+//Fine esercizio 4
+//Esercizio 5
+
+        // Raggruppa i prodotti per categoria e calcola la somma degli importi per ogni categoria
+        Map<String, Double> SommaDellaCategoria= productList.stream()
+                .collect(Collectors.groupingBy(Product::getCategory, // Raggruppa per categoria
+                        Collectors.summingDouble(Product::getPrice))); // Calcola la somma degli importi per ogni categoria
+
+        // Stampare i risultati
+       SommaDellaCategoria.forEach((category, summingDuouble) ->
+                System.out.println("Categoria: " + category + ", Totale Importi:" + summingDuouble));
+       //Fine esercizio 5
     }
-}
+
+    }
+
+
+
+
