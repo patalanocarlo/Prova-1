@@ -14,4 +14,7 @@ public class Customer { //Qui ho settato Customer
         return tier;
     }
 
+    public String getName() {
+        return name;
+    }
 }
